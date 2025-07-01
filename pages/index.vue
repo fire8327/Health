@@ -19,9 +19,8 @@
                         <img src="/images/index/1.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Анна</p>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <Icon class="text-3xl text-amber-400" name="material-symbols:star" />
-                        <p class="text-3xl">5</p>
+                    <div class="flex items-center gap-1">
+                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 5"/>
                     </div>
                 </div>
                 <p class="text-xl">
@@ -40,9 +39,8 @@
                         <img src="/images/index/2.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Ева</p>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <Icon class="text-3xl text-amber-400" name="material-symbols:star" />
-                        <p class="text-3xl">5</p>
+                    <div class="flex items-center gap-1">
+                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 5"/>
                     </div>
                 </div>
                 <p class="text-xl">
@@ -61,9 +59,8 @@
                         <img src="/images/index/3.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Дарья</p>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <Icon class="text-3xl text-amber-400" name="material-symbols:star" />
-                        <p class="text-3xl">4</p>
+                    <div class="flex items-center gap-1">
+                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 4"/>
                     </div>
                 </div>
                 <p class="text-xl">
