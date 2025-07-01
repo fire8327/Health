@@ -2,7 +2,7 @@
 
 @layer base {
     #__nuxt{
-        @apply flex flex-col min-h-screen font-medium text-lg
+        @apply flex flex-col min-h-screen text-lg font-light
     }
         
     :root{
