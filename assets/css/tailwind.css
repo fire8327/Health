@@ -36,3 +36,7 @@
 .mainHeading {
     @apply text-3xl text-[#131313] font-semibold font-mono tracking-wider
 }
+
+.mainLink.router-link-active {
+    @apply bg-[#F4EFE6]
+}

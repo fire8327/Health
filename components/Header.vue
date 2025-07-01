@@ -7,12 +7,12 @@
                     <Icon name="ix:user-profile"/>
                 </NuxtLink>
             </div>
-            <div class="flex items-center justify-between px-16 py-1.5 rounded-full bg-[#E6F5EE] text-center">
-                <NuxtLink to="/services">Услуги</NuxtLink>
-                <NuxtLink to="/doctors">Врачи</NuxtLink>
-                <NuxtLink to="/rec">Запись</NuxtLink>
-                <NuxtLink to="/about">О клинике</NuxtLink>
-                <NuxtLink to="/contacts">Контакты</NuxtLink>
+            <div class="flex items-center justify-between rounded-full bg-[#E6F5EE] text-center overflow-hidden">
+                <NuxtLink to="/services" class="px-16 py-1.5 rounded-full mainLink">Услуги</NuxtLink>
+                <NuxtLink to="/doctors" class="px-16 py-1.5 rounded-full mainLink">Врачи</NuxtLink>
+                <NuxtLink to="/rec" class="px-16 py-1.5 rounded-full mainLink">Запись</NuxtLink>
+                <NuxtLink to="/about" class="px-16 py-1.5 rounded-full mainLink">О клинике</NuxtLink>
+                <NuxtLink to="/contacts" class="px-16 py-1.5 rounded-full mainLink">Контакты</NuxtLink>
             </div>
         </div>
     </header>

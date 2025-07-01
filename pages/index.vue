@@ -7,7 +7,7 @@
                 Мы помогаем на всех уровнях - от амбулаторного до 
                 хирургического лечения.
             </p>
-            <NuxtLink to="/" class="text-2xl px-4 py-1.5 rounded-full bg-[#E6F5EE] w-fit shadow-2xl">Записаться</NuxtLink>
+            <NuxtLink to="/rec" class="text-2xl px-4 py-1.5 rounded-full bg-[#E6F5EE] w-fit shadow-2xl">Записаться</NuxtLink>
         </div>
     </div>
     <div class="flex flex-col gap-6 items-center">
