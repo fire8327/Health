@@ -6,7 +6,7 @@
                 <NuxtLink to="/">Услуги</NuxtLink>
                 <NuxtLink to="/">Врачи</NuxtLink>
                 <NuxtLink to="/">Запись</NuxtLink>
-                <NuxtLink to="/">О клинике</NuxtLink>
+                <NuxtLink to="/about">О клинике</NuxtLink>
                 <NuxtLink to="/">Контакты</NuxtLink>
             </div>
         </div>

@@ -34,5 +34,5 @@
 }
 
 .mainHeading {
-    @apply text-2xl text-[#131313] font-semibold font-mono tracking-wider
+    @apply text-3xl text-[#131313] font-semibold font-mono tracking-wider
 }

@@ -16,7 +16,7 @@
             <div class="flex flex-col gap-7 rounded-xl bg-[#F4EFE6] p-6 w-full">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-5">
-                        <img src="/images/reviews/1.png" alt="" class="rounded-full shadow-2xl">
+                        <img src="/images/index/1.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Анна</p>
                     </div>
                     <div class="flex items-center gap-4">
@@ -37,7 +37,7 @@
             <div class="flex flex-col gap-7 rounded-xl bg-[#F4EFE6] p-6 w-full">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-5">
-                        <img src="/images/reviews/2.png" alt="" class="rounded-full shadow-2xl">
+                        <img src="/images/index/2.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Ева</p>
                     </div>
                     <div class="flex items-center gap-4">
@@ -58,7 +58,7 @@
             <div class="flex flex-col gap-7 rounded-xl bg-[#F4EFE6] p-6 w-full">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-5">
-                        <img src="/images/reviews/3.png" alt="" class="rounded-full shadow-2xl">
+                        <img src="/images/index/3.png" alt="" class="rounded-full shadow-2xl">
                         <p class="text-3xl">Дарья</p>
                     </div>
                     <div class="flex items-center gap-4">
