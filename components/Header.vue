@@ -7,7 +7,7 @@
                 <NuxtLink to="/">Врачи</NuxtLink>
                 <NuxtLink to="/">Запись</NuxtLink>
                 <NuxtLink to="/about">О клинике</NuxtLink>
-                <NuxtLink to="/">Контакты</NuxtLink>
+                <NuxtLink to="/contacts">Контакты</NuxtLink>
             </div>
         </div>
     </header>
