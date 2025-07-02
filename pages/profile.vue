@@ -3,6 +3,9 @@
         <p class="mainHeading">Мои записи</p>
         <div class="grid grid-cols-4 gap-8">
             <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]" v-for="record in records">
+                <button @click="deleteRecord(record.id)" class="cursor-pointer self-end">
+                    <Icon name="material-symbols:delete-outline" class="text-3xl text-red-500"/>
+                </button>
                 <p>Время записи - {{ new Date(record.time).toLocaleString() }}</p>
                 <p>Врач - {{ record.doctors.full_name }}</p>
             </div>
@@ -37,6 +40,24 @@ const loadRecords = async () => {
     }
 
     records.value = data
+}
+
+
+/* удаление записи */
+const deleteRecord = async (id) => {
+    const { error } = await supabase
+    .from('records')
+    .delete()
+    .eq('id', id)
+
+    if (error) {
+        console.error(error)
+        showMessage('Не удалось удалить запись', false)
+    } else {
+        showMessage('Запись удалена!', true)
+    }
+
+    loadRecords()
 }
 
 
