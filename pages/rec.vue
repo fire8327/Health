@@ -91,7 +91,12 @@ const addRecord = async () => {
 /* проверка даты */
 const now = new Date()
 const pad = n => n.toString().padStart(2, '0')
-const minDateTime = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`
+const today = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+
+// если сейчас раньше 9:00, то min = сегодня 09:00, иначе min = сейчас
+const minDateTime = now.getHours() < 9
+  ? `${today}T09:00`
+  : `${today}T${pad(now.getHours())}:${pad(now.getMinutes())}`
 
 
 /* первоначальная загрузка */

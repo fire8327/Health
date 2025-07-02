@@ -9,7 +9,7 @@
             <div class="flex flex-col gap-4 md:w-2/3 lg:w-1/2">
                 <FormKit v-model="userForm.policy" validation="required|number" messages-class="text-[#E9556D]" type="text" placeholder="Полис" name="Полис" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
                 <FormKit v-model="userForm.phone" validation="required|matches:/^[7-8]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}$/" :validation-messages="{ matches: 'Номер телефона должен быть в формате 7/8-xxx-xxx-xx-xx', }" messages-class="text-[#E9556D]" type="tel" placeholder="x-xxx-xxx-xx-xx" name="Номер телефона" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
-                <FormKit v-model="userForm.password" validation="required" messages-class="text-[#E9556D]" type="password" placeholder="······" name="Пароль" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
+                <FormKit v-model="userForm.password" validation="required|length:8" messages-class="text-[#E9556D]" type="password" placeholder="······" name="Пароль" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
             </div>
             <button :disabled="isRegDisabled" :class="{ 'opacity-50 cursor-not-allowed': isRegDisabled }" type="submit" class="cursor-pointer px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center">Зарегистрироватся</button>
         </FormKit>
