@@ -4,12 +4,7 @@
             <Icon name="material-symbols:keyboard-backspace-rounded" class="text-2xl" />
             <p class="text-2xl">На главную</p>
         </NuxtLink>
-        <p class="text-2xl">
-            Педиатрия в Казани: услуги квалифицированного педиатра в нашей клинике
-            Врач-педиатр в Казани – это специалист, который занимается диагностикой, терапией заболеваний у
-            несовершеннолетних пациентов, осуществляет профилактические меры для предотвращения заболеваний в детском
-            возрасте.
-        </p>
+        <p class="text-2xl">{{ specialty.desc }}</p>
         <div class="grid grid-cols-3 gap-10">
             <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]" v-for="doctor in doctors">
                 <div class="flex items-center gap-4">
@@ -81,9 +76,27 @@ const loadDoctors = async () => {
 }
 
 
+/* получение специальностей */
+const specialty = ref([])
+const loadSpecialties = async () => {
+    const { data, error } = await supabase
+    .from('specialty')
+    .select('desc')
+    .eq('id', route.params.id)
+    .single()
+
+    if (error) {
+        console.error(error)
+    }
+
+    specialty.value = data
+}
+
+
 /* первоначальная загрузка */
 onMounted(() => {
     loadServices()
     loadDoctors()
+    loadSpecialties()
 })
 </script>
