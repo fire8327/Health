@@ -63,25 +63,23 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-col gap-4">
-            <div class="relative rounded-xl overflow-hidden">
-                <table class="text-xl w-full text-center">
-                    <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE] font-normal">
-                        <td class="px-10 py-6">Время</td>
-                        <td class="px-10 py-6">Врач</td>
-                        <td class="px-10 py-6">Наименование услуги</td>
-                        <td class="px-10 py-6">Цена услуги (в руб.)</td>
-                    </tr>
-                    <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE]">
-                        <td class="px-10 py-6">10:00</td>
-                        <td class="px-10 py-6">Закарьяева Анна Альбертовна</td>
-                        <td class="px-10 py-6">Педиатрия</td>
-                        <td class="px-10 py-6">2 500,00</td>
-                    </tr>
-                </table>
-            </div>
-            <NuxtLink to="/rec" class="px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center w-fit mx-auto">Записаться</NuxtLink>
+        <div class="relative rounded-xl overflow-hidden">
+            <table class="text-xl w-full text-center">
+                <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE] font-normal">
+                    <td class="px-10 py-6">Время</td>
+                    <td class="px-10 py-6">Врач</td>
+                    <td class="px-10 py-6">Наименование услуги</td>
+                    <td class="px-10 py-6">Цена услуги (в руб.)</td>
+                </tr>
+                <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE]">
+                    <td class="px-10 py-6">10:00</td>
+                    <td class="px-10 py-6">Закарьяева Анна Альбертовна</td>
+                    <td class="px-10 py-6">Педиатрия</td>
+                    <td class="px-10 py-6">2 500,00</td>
+                </tr>
+            </table>
         </div>
+        <NuxtLink to="/rec" class="px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center w-fit mx-auto">Записаться</NuxtLink>
     </div>
 </template>
 
