@@ -24,6 +24,10 @@ const { showMessage } = useMessagesStore()
 const { id:userId } = useUserStore()
 
 
+/* роутер */
+const router = useRouter()
+
+
 /* форма записи */
 const recordForm = ref({
     doctor_id: null,
@@ -71,20 +75,35 @@ watch(specialty, () => {
 /* добавление записи */
 const isRecDisabled = ref(false)
 const addRecord = async () => {
-    isRecDisabled.value = true
-    recordForm.value.time = new Date(recordForm.value.time)
+  isRecDisabled.value = true
+  // проверка на занятость времени у врача
+  const { data: existing, error: checkError } = await supabase
+    .from('records')
+    .select('id')
+    .eq('doctor_id', recordForm.value.doctor_id)
+    .eq('time', new Date(recordForm.value.time).toISOString().slice(0, 19).replace('T', ' '))
 
-    const { data, error } = await supabase
+  if (existing && existing.length > 0) {
+    showMessage('Это время уже занято у выбранного врача!', false)
+    isRecDisabled.value = false
+    return
+  }
+
+  // если время свободно — добавляем запись
+  recordForm.value.time = new Date(recordForm.value.time)
+  
+  const { data, error } = await supabase
     .from('records')
     .insert(recordForm.value)
     .select()
 
-    if (data) {
-        isRecDisabled.value = false
-        showMessage('Запись успешно создана!', true)
-    } else {
-        showMessage('Произошла ошибка!', false)
-    }
+  if (data) {
+    isRecDisabled.value = false
+    showMessage('Запись успешно создана!', true)
+    router.push('/profile')
+  } else {
+    showMessage('Произошла ошибка!', false)
+  }
 }
 
 
