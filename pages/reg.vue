@@ -4,19 +4,66 @@
             <Icon name="material-symbols:keyboard-backspace-rounded" class="text-2xl" />
             <p class="text-2xl">На главную</p>
         </NuxtLink>
-        <FormKit type="form" :actions="false" messages-class="hidden" form-class="flex flex-col gap-6 items-center justify-center">
+        <FormKit @submit="regUser" type="form" :actions="false" messages-class="hidden" form-class="flex flex-col gap-6 items-center justify-center">
             <p class="mainHeading">Регистрация</p>
             <div class="flex flex-col gap-4 md:w-2/3 lg:w-1/2">
-                <FormKit validation="required" messages-class="text-[#E9556D]" type="text" placeholder="Полис" name="Полис" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
-                <FormKit validation="required" messages-class="text-[#E9556D]" type="text" placeholder="Номер телефона" name="Номер телефона" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
-                <FormKit validation="required" messages-class="text-[#E9556D]" type="password" placeholder="······" name="Пароль" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
+                <FormKit v-model="userForm.policy" validation="required" messages-class="text-[#E9556D]" type="text" placeholder="Полис" name="Полис" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
+                <FormKit v-model="userForm.phone" validation="required" messages-class="text-[#E9556D]" type="text" placeholder="Номер телефона" name="Номер телефона" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
+                <FormKit v-model="userForm.password" validation="required" messages-class="text-[#E9556D]" type="password" placeholder="······" name="Пароль" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
             </div>
-            <button type="submit" class="px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center">Зарегистрироватся</button>
+            <button :disabled="isRegDisabled" :class="{ 'opacity-50 cursor-not-allowed': isRegDisabled }" type="submit" class="cursor-pointer px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center">Зарегистрироватся</button>
         </FormKit>
         <p class="text-xl ml-auto w-fit">Уже есть аккаунт? <NuxtLink to="/auth" class="text-[#263AA7]">Войти</NuxtLink></p>
     </div>
 </template>
 
 <script setup>
+/* создание формы пользователя */
+const userForm = ref({
+    policy: '',
+    phone: '',
+    password: ''
+})
 
+/* создание сообщений */
+const { showMessage } = useMessagesStore()
+
+
+/* подключение БД и роутера */
+const supabase = useSupabaseClient()
+const router = useRouter()
+
+
+/* регистрация пользователя */
+const isRegDisabled = ref(false)
+const regUser = async () => {
+    isRegDisabled.value = true
+    const { data: user, error: usersError } = await supabase
+    .from('users')
+    .select("*")
+    .eq('phone', userForm.value.phone)
+    .single()
+
+    if (user) {
+        userForm.value.phone = ""
+        isRegDisabled.value = false
+        return showMessage("Такой  логин уже используется!", false)
+    } 
+
+    const { data, error } = await supabase
+    .from('users')
+    .insert(userForm.value)
+    .select()
+
+    if (data) {
+        console.log(data)
+        showMessage('Успешная регистрация!', true)
+        isRegDisabled.value = false
+        router.push('/auth')
+    } else {
+        console.log(userForm.value)            
+        isRegDisabled.value = false
+        showMessage('Произошла ошибка!', false)
+    }
+}
 </script>

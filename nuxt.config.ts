@@ -6,6 +6,10 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/icon',
-    '@formkit/nuxt'
-  ]
+    '@formkit/nuxt',
+    '@nuxtjs/supabase'
+  ],
+  supabase: {
+    redirect: false
+  }
 })
