@@ -9,7 +9,7 @@
             <div class="flex flex-col gap-4 md:w-2/3 lg:w-1/2">
                 <FormKit v-model="specialty" validation="required" messages-class="text-[#E9556D]" type="select" :options="specialties" placeholder="Специальность" name="Специальность" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
                 <FormKit v-if="specialty" v-model="recordForm.doctor_id" validation="required" messages-class="text-[#E9556D]" type="select" :options="doctors" placeholder="Врач" name="Врач" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
-                <FormKit v-model="recordForm.time" validation="required" messages-class="text-[#E9556D]" type="datetime-local" placeholder="Время" name="Время" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
+                <FormKit v-model="recordForm.time" :min="minDateTime" validation="required" messages-class="text-[#E9556D]" type="datetime-local" placeholder="Время" name="Время" outer-class="w-full" input-class="w-full px-4 py-1.5 rounded-xl bg-[#F4EFE6]"/>
             </div>
             <button :disabled="isRecDisabled" :class="{ 'opacity-50 cursor-not-allowed': isRecDisabled }" type="submit" class="cursor-pointer px-10 py-1.5 bg-[#E6F5EE] rounded-full text-center">Создать запись</button>
         </FormKit>
@@ -86,6 +86,12 @@ const addRecord = async () => {
         showMessage('Произошла ошибка!', false)
     }
 }
+
+
+/* проверка даты */
+const now = new Date()
+const pad = n => n.toString().padStart(2, '0')
+const minDateTime = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`
 
 
 /* первоначальная загрузка */
