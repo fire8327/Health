@@ -8,7 +8,7 @@
                 </NuxtLink>
             </div>
             <div class="flex items-center justify-between rounded-full bg-[#E6F5EE] text-center overflow-hidden">
-                <NuxtLink to="/services" class="px-16 py-1.5 rounded-full mainLink">Услуги</NuxtLink>
+                <NuxtLink to="/services" :class="['mainLink', isServicesActive ? 'router-link-active' : '']" class="px-16 py-1.5 rounded-full">Услуги</NuxtLink>
                 <NuxtLink to="/doctors" class="px-16 py-1.5 rounded-full mainLink">Врачи</NuxtLink>
                 <NuxtLink to="/rec" class="px-16 py-1.5 rounded-full mainLink">Запись</NuxtLink>
                 <NuxtLink to="/about" class="px-16 py-1.5 rounded-full mainLink">О клинике</NuxtLink>
@@ -29,4 +29,11 @@ const { messageTitle, messageType } = storeToRefs(useMessagesStore())
 
 /* хранилище пользователей */
 const userStore = useUserStore()
+
+
+/* подсветка ссылки услуг */
+const route = useRoute()
+const isServicesActive = computed(() =>
+  route.path === '/services' || route.path.startsWith('/services/service-')
+)
 </script>
