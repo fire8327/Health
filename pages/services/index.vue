@@ -38,9 +38,34 @@
                 <NuxtLink to="/" class="absolute z-[1] text-center inset-0 flex items-center justify-center">Гастроэнтерология</NuxtLink>
             </div>
         </div>
+        <button @click="uploadToSupabase" class="px-4 py-2 bg-blue-500 text-white rounded-xl w-fit cursor-pointer">Загрузить в Supabase</button>
     </div>
 </template>
 
 <script setup>
+const supabase = useSupabaseClient()
 
+// Массив объектов с наименованиями услуг
+const services = [
+  { name: 'Педиатрия' },
+  { name: 'Гинекология' },
+  { name: 'Кардиология' },
+  { name: 'Хирургия' },
+  { name: 'Неврология' },
+  { name: 'Дерматология' },
+  { name: 'Нефрология' },
+  { name: 'Гастроэнтерология' },
+]
+
+// Функция для загрузки массива services в Supabase
+const uploadToSupabase = async () => {
+  const { data, error } = await supabase.from('services').insert(services)
+  if (error) {
+    console.error('Ошибка при загрузке в Supabase:', error)
+    alert('Ошибка при загрузке в Supabase!')
+  } else {
+    console.log('Услуги успешно загружены в Supabase:', data)
+    alert('Услуги успешно загружены!')
+  }
+}
 </script>
