@@ -11,54 +11,16 @@
             возрасте.
         </p>
         <div class="grid grid-cols-3 gap-10">
-            <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]">
+            <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]" v-for="doctor in doctors">
                 <div class="flex items-center gap-4">
-                    <img src="/images/index/1.png" alt="" class="rounded-full shadow-2xl">
-                    <p class="text-2xl">Закарьяева Анна Альбертовна</p>
+                    <img :src="`/images/doctors/${doctor.avatar}`" :alt="doctor.full_name" class="w-20 rounded-full aspect-square object-cover object-center shadow-2xl">
+                    <p class="text-2xl">{{ doctor.full_name }}</p>
                 </div>
-                <p>
-                    Заведующая педиатрического
-                    отделения, врач-педиатр,
-                    кандидат медицинских наук
-                </p>
-                <div class="flex items-center justify-between">
-                    <p class="text-xl">Стаж 10 лет</p>
+                <p>{{ doctor.position }}</p>
+                <div class="flex items-center justify-between mt-auto">
+                    <p class="text-xl">Стаж {{ doctor.experience }} лет</p>
                     <div class="flex items-center gap-1">
-                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 5" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]">
-                <div class="flex items-center gap-4">
-                    <img src="/images/index/1.png" alt="" class="rounded-full shadow-2xl">
-                    <p class="text-2xl">Закарьяева Анна Альбертовна</p>
-                </div>
-                <p>
-                    Заведующая педиатрического
-                    отделения, врач-педиатр,
-                    кандидат медицинских наук
-                </p>
-                <div class="flex items-center justify-between">
-                    <p class="text-xl">Стаж 10 лет</p>
-                    <div class="flex items-center gap-1">
-                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 5" />
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col gap-4 p-4 rounded-xl bg-[#F4EFE6]">
-                <div class="flex items-center gap-4">
-                    <img src="/images/index/1.png" alt="" class="rounded-full shadow-2xl">
-                    <p class="text-2xl">Закарьяева Анна Альбертовна</p>
-                </div>
-                <p>
-                    Заведующая педиатрического
-                    отделения, врач-педиатр,
-                    кандидат медицинских наук
-                </p>
-                <div class="flex items-center justify-between">
-                    <p class="text-xl">Стаж 10 лет</p>
-                    <div class="flex items-center gap-1">
-                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in 5" />
+                        <Icon class="text-2xl text-amber-400" name="material-symbols:star" v-for="i in doctor.rating" />
                     </div>
                 </div>
             </div>
@@ -66,16 +28,14 @@
         <div class="relative rounded-xl overflow-hidden">
             <table class="text-xl w-full text-center">
                 <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE] font-normal">
-                    <td class="px-10 py-6">Время</td>
-                    <td class="px-10 py-6">Врач</td>
+                    <td class="px-10 py-6">Код услуги</td>
                     <td class="px-10 py-6">Наименование услуги</td>
                     <td class="px-10 py-6">Цена услуги (в руб.)</td>
                 </tr>
-                <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE]">
-                    <td class="px-10 py-6">10:00</td>
-                    <td class="px-10 py-6">Закарьяева Анна Альбертовна</td>
-                    <td class="px-10 py-6">Педиатрия</td>
-                    <td class="px-10 py-6">2 500,00</td>
+                <tr class="bg-[#F4EFE6] odd:bg-[#E6F5EE]" v-for="service in services">
+                    <td class="px-10 py-6">{{ service.code }}</td>
+                    <td class="px-10 py-6">{{ service.name }}</td>
+                    <td class="px-10 py-6">{{ service.price.toLocaleString() }}</td>
                 </tr>
             </table>
         </div>
@@ -84,5 +44,46 @@
 </template>
 
 <script setup>
+/* подключение БД и роута*/
+const supabase = useSupabaseClient()
+const route = useRoute()
 
+
+/* получение услуг */
+const services = ref([])
+const loadServices = async () => {
+    const { data, error } = await supabase
+    .from('services')
+    .select('*')
+    .eq('specialty_id', route.params.id)
+
+    if (error) {
+        console.error(error)
+    }
+
+    services.value = data
+}
+
+
+/* получение врачей */
+const doctors = ref([])
+const loadDoctors = async () => {
+    const { data, error } = await supabase
+    .from('doctors')
+    .select('*')
+    .eq('specialty_id', route.params.id)
+
+    if (error) {
+        console.error(error)
+    }
+
+    doctors.value = data
+}
+
+
+/* первоначальная загрузка */
+onMounted(() => {
+    loadServices()
+    loadDoctors()
+})
 </script>
